@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Finance Tracker</title>
+    </head>
+    <body>
+        <h1>Welcome to my Finance Tracker</h1>
+        <p>Track your income and expenses here</p>
+        <form action="/add" method ="POST">
+            <input type="text" name = "description" placeholder="Description e.g. Groceries">
+            <input type="number" name = "amount" placeholder="Amount e.g. 50">
+            <select name="type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <button type="submit">Add Transaction</button>
+        </form>
+    </body>
+</html>
