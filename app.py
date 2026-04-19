@@ -16,9 +16,18 @@ with app.app_context():
 
 @app.route("/")
 def home():
+    total_income = 0
+    total_expense = 0
     transactions = Transaction.query.all()
-    print(transactions)
-    return render_template("index.html", transactions=transactions)
+
+    for transaction in transactions:
+        if transaction.type == "income":
+            total_income += transaction.amount
+        elif transaction.type == "expense":
+            total_expense += transaction.amount
+
+    total = total_income-total_expense
+    return render_template("index.html", transactions=transactions, total=total, total_income = total_income, total_expense = total_expense)
 
 @app.route("/about")
 def about():
