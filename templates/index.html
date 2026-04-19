@@ -15,5 +15,11 @@
             </select>
             <button type="submit">Add Transaction</button>
         </form>
+        {% for transaction in transactions %}
+            <p>{{transaction.description}}
+                {{transaction.amount}}
+                {{transaction.type}}
+            </p>
+        {% endfor %}
     </body>
 </html>

@@ -16,7 +16,9 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    transactions = Transaction.query.all()
+    print(transactions)
+    return render_template("index.html", transactions=transactions)
 
 @app.route("/about")
 def about():
