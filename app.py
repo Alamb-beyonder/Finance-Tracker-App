@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def add_transaction():
     transaction = Transaction(description=description, amount=amount, type=type)
     db.session.add(transaction)
     db.session.commit()
-    return render_template("index.html")
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
