@@ -9,22 +9,38 @@
         <form action="/add" method ="POST">
             <input type="text" name = "description" placeholder="Description e.g. Groceries">
             <input type="number" name = "amount" placeholder="Amount e.g. 50">
+            
             <select name="type">
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </select>
+
+            <select name = "category">
+                <option value="groceries">Groceries</option>
+                <option value="transport">Transport</option>
+                <option value="salary">Salary</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="utilities">Utilities</option>
+            </select>
+
             <button type="submit">Add Transaction</button>
         </form>
         {% for transaction in transactions %}
             <p>{{transaction.description}}
                 {{transaction.amount}}
                 {{transaction.type}}
+                {{transaction.category}}
             </p>
             <form action="/delete/{{transaction.id}}" method="POST">
                 <button type="submit">Delete Transaction</button>
             </form>
             <a href = "/edit/{{transaction.id}}">Edit</a>
         {% endfor %}
+        
+        {% for category, total in category_totals.items() %}
+        <p>{{category}}: {{total}}</p>
+        {% endfor %}
+
         <p>Total income: {{total_income}}
            Total expense: {{total_expense}}
            Balance: {{total}} 

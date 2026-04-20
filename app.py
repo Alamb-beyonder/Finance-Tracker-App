@@ -10,6 +10,7 @@ class Transaction(db.Model):
     description = db.Column(db.String(100))
     amount = db.Column(db.Float)
     type = db.Column(db.String(10))
+    category = db.Column(db.String(20))
     
 with app.app_context():
     db.create_all()
@@ -18,6 +19,7 @@ with app.app_context():
 def home():
     total_income = 0
     total_expense = 0
+    category_totals = {}
     transactions = Transaction.query.all()
 
     for transaction in transactions:
@@ -26,8 +28,13 @@ def home():
         elif transaction.type == "expense":
             total_expense += transaction.amount
 
+        if transaction.category not in category_totals:
+            category_totals[transaction.category] = 0
+        category_totals[transaction.category] += transaction.amount
+
     total = total_income-total_expense
-    return render_template("index.html", transactions=transactions, total=total, total_income = total_income, total_expense = total_expense)
+
+    return render_template("index.html", transactions=transactions, total=total, total_income = total_income, total_expense = total_expense, category_totals=category_totals)
 
 @app.route("/about")
 def about():
@@ -38,7 +45,8 @@ def add_transaction():
     description = request.form["description"]
     amount = request.form["amount"]
     type = request.form["type"]
-    transaction = Transaction(description=description, amount=amount, type=type)
+    category = request.form["category"]
+    transaction = Transaction(description=description, amount=amount, type=type, category=category)
     db.session.add(transaction)
     db.session.commit()
     return redirect(url_for("home"))
@@ -50,9 +58,11 @@ def edit_transaction(id):
         description = request.form["description"]
         amount = request.form["amount"]
         type = request.form["type"]
+        category = request.form["category"]
         transaction.description = description
         transaction.amount = amount
         transaction.type = type
+        transaction.category = category
         db.session.commit()
         return redirect(url_for("home"))
     return render_template("edit.html", transaction=transaction)

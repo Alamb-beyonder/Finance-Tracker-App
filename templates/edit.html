@@ -12,6 +12,15 @@
                 <option value="income" {% if transaction.type == "income" %} selected {% endif %}>Income</option>
                 <option value="expense" {% if transaction.type == "expense" %} selected {% endif %}>Expense</option>
             </select>
+            
+            <select name = "category">
+                <option value="groceries" {% if transaction.category == "groceries" %} selected {% endif %}>Groceries</option>
+                <option value="transport" {% if transaction.category == "transport" %} selected {% endif %}>Transport</option>
+                <option value="salary" {% if transaction.category == "salary" %} selected {% endif %}>Salary</option>
+                <option value="entertainment" {% if transaction.category == "entertainment" %} selected {% endif %}>Entertainment</option>
+                <option value="utilities" {% if transaction.category == "utilities" %} selected {% endif %}>Utilities</option>
+            </select>
+
             <button type="submit">Save Changes</button>        
         </form>
     </body>
