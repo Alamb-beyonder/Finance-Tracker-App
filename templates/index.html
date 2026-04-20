@@ -23,6 +23,7 @@
             <form action="/delete/{{transaction.id}}" method="POST">
                 <button type="submit">Delete Transaction</button>
             </form>
+            <a href = "/edit/{{transaction.id}}">Edit</a>
         {% endfor %}
         <p>Total income: {{total_income}}
            Total expense: {{total_expense}}

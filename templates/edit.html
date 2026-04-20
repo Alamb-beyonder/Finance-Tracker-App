@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Transaction</title>
+    </head>
+    <body>
+        <form action="/edit/{{transaction.id}}" method="POST">
+            <input type="text" name = "description" value="{{transaction.description}}">
+            <input type="number" name = "amount" value="{{transaction.amount}}">
+
+            <select name="type">
+                <option value="income" {% if transaction.type == "income" %} selected {% endif %}>Income</option>
+                <option value="expense" {% if transaction.type == "expense" %} selected {% endif %}>Expense</option>
+            </select>
+            <button type="submit">Save Changes</button>        
+        </form>
+    </body>
+</html>

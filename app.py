@@ -43,6 +43,20 @@ def add_transaction():
     db.session.commit()
     return redirect(url_for("home"))
 
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit_transaction(id):
+    transaction = Transaction.query.get(id)
+    if request.method == "POST":
+        description = request.form["description"]
+        amount = request.form["amount"]
+        type = request.form["type"]
+        transaction.description = description
+        transaction.amount = amount
+        transaction.type = type
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("edit.html", transaction=transaction)
+
 @app.route("/delete/<int:id>", methods=["POST"])
 def delete_transaction(id):
     transaction = Transaction.query.get(id)
