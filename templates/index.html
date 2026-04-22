@@ -1,50 +1,91 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>Finance Tracker</title>
     </head>
     <body>
-        <h1>Welcome to my Finance Tracker</h1>
-        <p>Track your income and expenses here</p>
-        <form action="/add" method ="POST">
-            <input type="text" name = "description" placeholder="Description e.g. Groceries">
-            <input type="number" name = "amount" placeholder="Amount e.g. 50">
+        <div class = "body_container">
+            <h1>Welcome to my Finance Tracker</h1>
             
-            <select name="type">
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
-            </select>
+            <div class="chart-container">
+                <h2>Income Vs Expenses</h2>
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <form action="/add" method ="POST">
+                <input type="text" name = "description" placeholder="Description e.g. Groceries">
+                <input type="number" name = "amount" placeholder="Amount e.g. 50">
+                
+                <select name="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
 
-            <select name = "category">
-                <option value="groceries">Groceries</option>
-                <option value="transport">Transport</option>
-                <option value="salary">Salary</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="utilities">Utilities</option>
-            </select>
+                <select name = "category">
+                    <option value="groceries">Groceries</option>
+                    <option value="transport">Transport</option>
+                    <option value="salary">Salary</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="utilities">Utilities</option>
+                </select>
 
-            <button type="submit">Add Transaction</button>
-        </form>
-        {% for transaction in transactions %}
-            <p>{{transaction.description}}
-                {{transaction.amount}}
-                {{transaction.type}}
-                {{transaction.category}}
-            </p>
-            <form action="/delete/{{transaction.id}}" method="POST">
-                <button type="submit">Delete Transaction</button>
+                <button type="submit">Add Transaction</button>
             </form>
-            <a href = "/edit/{{transaction.id}}">Edit</a>
-        {% endfor %}
-        
-        {% for category, total in category_totals.items() %}
-        <p>{{category}}: {{total}}</p>
-        {% endfor %}
+            {% for transaction in transactions %}
+                <p>{{transaction.description}}
+                    {{transaction.amount}}
+                    {{transaction.type}}
+                    {{transaction.category}}
+                </p>
+                <form action="/delete/{{transaction.id}}" method="POST">
+                    <button type="submit">Delete Transaction</button>
+                </form>
+                <a href = "/edit/{{transaction.id}}">Edit</a>
+            {% endfor %}
+            
+            {% for category, total in category_totals.items() %}
+            <p>{{category}}: {{total}}</p>
+            {% endfor %}
 
-        <p>Total income: {{total_income}}
-           Total expense: {{total_expense}}
-           Balance: {{total}} 
-        </p>
+            <p>Total income: {{total_income}}
+            Total expense: {{total_expense}}
+            Balance: {{total}} 
+            </p>
+        </div>
+        <script>
+            let categories = {{category_totals.keys() | list | tojson}};
+            let amounts = {{category_totals.values() | list | tojson}};
+
+            let ctx = document.getElementById("categoryChart").getContext("2d");
+            new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        data: amounts,
+                        backgroundColor: [
+                            "#e74c3c",
+                            "#3498db",
+                            "#2ecc71",
+                            "#f39c12",
+                            "#9b59b6",
+                            "#1abc9c"
+                        ]
+                    }]
+                },
+               options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: "top"
+                        }
+                    }
+                }
+            })
+        </script>
     </body>
 </html>

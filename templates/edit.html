@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
         <title>Edit Transaction</title>
     </head>
     <body>
-        <form action="/edit/{{transaction.id}}" method="POST">
-            <input type="text" name = "description" value="{{transaction.description}}">
-            <input type="number" name = "amount" value="{{transaction.amount}}">
+        <div class = "body_container">
+            <form action="/edit/{{transaction.id}}" method="POST">
+                <input type="text" name = "description" value="{{transaction.description}}">
+                <input type="number" name = "amount" value="{{transaction.amount}}">
 
-            <select name="type">
-                <option value="income" {% if transaction.type == "income" %} selected {% endif %}>Income</option>
-                <option value="expense" {% if transaction.type == "expense" %} selected {% endif %}>Expense</option>
-            </select>
-            
-            <select name = "category">
-                <option value="groceries" {% if transaction.category == "groceries" %} selected {% endif %}>Groceries</option>
-                <option value="transport" {% if transaction.category == "transport" %} selected {% endif %}>Transport</option>
-                <option value="salary" {% if transaction.category == "salary" %} selected {% endif %}>Salary</option>
-                <option value="entertainment" {% if transaction.category == "entertainment" %} selected {% endif %}>Entertainment</option>
-                <option value="utilities" {% if transaction.category == "utilities" %} selected {% endif %}>Utilities</option>
-            </select>
+                <select name="type">
+                    <option value="income" {% if transaction.type == "income" %} selected {% endif %}>Income</option>
+                    <option value="expense" {% if transaction.type == "expense" %} selected {% endif %}>Expense</option>
+                </select>
+                
+                <select name = "category">
+                    <option value="groceries" {% if transaction.category == "groceries" %} selected {% endif %}>Groceries</option>
+                    <option value="transport" {% if transaction.category == "transport" %} selected {% endif %}>Transport</option>
+                    <option value="salary" {% if transaction.category == "salary" %} selected {% endif %}>Salary</option>
+                    <option value="entertainment" {% if transaction.category == "entertainment" %} selected {% endif %}>Entertainment</option>
+                    <option value="utilities" {% if transaction.category == "utilities" %} selected {% endif %}>Utilities</option>
+                </select>
 
-            <button type="submit">Save Changes</button>        
-        </form>
+                <button type="submit">Save Changes</button>        
+            </form>
+        </div>
     </body>
 </html>
