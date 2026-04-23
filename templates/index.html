@@ -9,7 +9,7 @@
         <title>Finance Tracker</title>
     </head>
     <body>
-        <div class = "body_container">
+        <div class = "body-container">
             <h1>Welcome to my Finance Tracker</h1>
             
             <div class="chart-container">
@@ -17,44 +17,46 @@
                 <canvas id="categoryChart"></canvas>
             </div>
             <form action="/add" method ="POST">
-                <input type="text" name = "description" placeholder="Description e.g. Groceries">
-                <input type="number" name = "amount" placeholder="Amount e.g. 50">
+                <input type="text" name = "description" placeholder="Description e.g. Groceries" required>
+                <input type="number" name = "amount" placeholder="Amount e.g. 50" required>
                 
-                <select name="type">
+                <select name="type" required>
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
                 </select>
 
-                <select name = "category">
+                <select name = "category" required>
+                    <option value="food">Food</option>
                     <option value="groceries">Groceries</option>
                     <option value="transport">Transport</option>
                     <option value="salary">Salary</option>
                     <option value="entertainment">Entertainment</option>
                     <option value="utilities">Utilities</option>
+                    
                 </select>
 
-                <button type="submit">Add Transaction</button>
+                <button class="btn btn-add" type="submit">Add Transaction +</button>
             </form>
             {% for transaction in transactions %}
                 <p>{{transaction.description}}
-                    {{transaction.amount}}
+                    ${{ "%.2f" | format(transaction.amount) }}
                     {{transaction.type}}
                     {{transaction.category}}
+                    {{transaction.date}}
                 </p>
-                <form action="/delete/{{transaction.id}}" method="POST">
-                    <button type="submit">Delete Transaction</button>
-                </form>
-                <a href = "/edit/{{transaction.id}}">Edit</a>
+                <div class="transaction-actions">
+                    <a class="btn btn-edit" href = "/edit/{{transaction.id}}">Edit</a>
+
+                    <form action="/delete/{{transaction.id}}" method="POST">
+                        <button class="btn btn-delete" type="submit">Delete Transaction -</button>
+                    </form>
+                </div>
             {% endfor %}
             
-            {% for category, total in category_totals.items() %}
-            <p>{{category}}: {{total}}</p>
-            {% endfor %}
-
-            <p>Total income: {{total_income}}
-            Total expense: {{total_expense}}
-            Balance: {{total}} 
-            </p>
+            <h3>Total income:<span class="income"> ${{total_income}}</span>
+                Total expense:<span class="expense"> ${{total_expense}}</span>
+                Balance:<span class="balance"> ${{total}}</span>
+            </h3>
         </div>
         <script>
             let categories = {{category_totals.keys() | list | tojson}};
@@ -81,7 +83,7 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: "top"
+                            position: "right"
                         }
                     }
                 }

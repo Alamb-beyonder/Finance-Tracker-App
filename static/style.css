@@ -5,13 +5,14 @@ html {
     font-family: "Merriweather", serif;
 }
 
-.body_container {
+
+.body-container {
     padding: 20px;
     border-radius: 30px;
     max-width: 800px;
     margin: 0px auto;
     background-color:beige;
-    min-height: 100vh
+    
 }
 
 h1, h2 {
@@ -20,12 +21,57 @@ h1, h2 {
     margin-bottom: 0;
 }
 
-
-
 .chart-container {
     width: 400px;
     height: 400px;
-    margin: 0 auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin: 0px auto;
+    margin-top: 40px;
+}
+
+.transaction-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    font-family: "Merriweather", serif;
+    font-size: 13px;
+    color: white;
+    padding: 4px 8px;
+    text-decoration: none;
+    border: 1px black solid;
+    cursor: pointer;
+}
+
+.btn-add {
+    background-color: green;
+}
+
+.btn-add:hover {
+    background-color: rgb(112, 224, 112);
+}
+.btn-delete {
+    background-color: rgb(228, 54, 54);
+}
+
+.btn-delete:hover {
+    background-color: rgb(246, 119, 119);
+}
+
+.btn-edit {
+    background-color: rgb(23, 181, 238);
+}
+
+.btn-edit:hover {
+    background-color: rgb(111, 235, 239);
+}
+
+.income {
+    color: green;
+}
+.expense {
+    color:red
+}
+.balance {
+    color:brown
 }

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///finance.db"
@@ -11,6 +12,7 @@ class Transaction(db.Model):
     amount = db.Column(db.Float)
     type = db.Column(db.String(10))
     category = db.Column(db.String(20))
+    date = db.Column(db.Date)
     
 with app.app_context():
     db.create_all()
@@ -46,7 +48,8 @@ def add_transaction():
     amount = request.form["amount"]
     type = request.form["type"]
     category = request.form["category"]
-    transaction = Transaction(description=description, amount=amount, type=type, category=category)
+    today = date.today()
+    transaction = Transaction(description=description, amount=amount, type=type, category=category, date=today)
     db.session.add(transaction)
     db.session.commit()
     return redirect(url_for("home"))
