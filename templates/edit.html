@@ -19,6 +19,7 @@
                 </select>
                 
                 <select name = "category" required>
+                    <option value="food" {% if transaction.category == "food" %} selected {% endif %}>Food</option>
                     <option value="groceries" {% if transaction.category == "groceries" %} selected {% endif %}>Groceries</option>
                     <option value="transport" {% if transaction.category == "transport" %} selected {% endif %}>Transport</option>
                     <option value="salary" {% if transaction.category == "salary" %} selected {% endif %}>Salary</option>
