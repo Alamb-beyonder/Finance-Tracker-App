@@ -57,6 +57,7 @@
                 Total expense:<span class="expense"> ${{total_expense}}</span>
                 Balance:<span class="balance"> ${{total}}</span>
             </h3>
+            <a href="/logout">Logout</a>
         </div>
         <script>
             let categories = {{category_totals.keys() | list | tojson}};

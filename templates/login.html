@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+        <title>Login</title>
+    </head>
+    <body>
+        <div class = "body-container">
+        <h1>Login</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/login" method ="POST">
+                <input type="text" name = "username" placeholder="Write your username here" required>
+                <input type="password" name = "password" placeholder="Write your password here" required>
+                <button class="btn" type="submit">Login</button>
+        </form>
+        <a href="/register">Sign up here</a>
+        </div>
+    </body>
+</html>
