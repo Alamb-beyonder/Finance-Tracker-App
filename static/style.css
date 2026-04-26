@@ -14,20 +14,64 @@ html {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.registration {
+.center-page {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    text-align: center;
-    margin: 200px auto;
-    max-width: 600px;
-    padding: 100px;
+.registration {
+    margin-top: 120px;
+    max-width: 500px;
+    padding: 50px 50px;
+}
+
+.details-p {
+    color: grey;
+    font-size: 12px;
 }
 
 .details-input {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    text-align: center;
+    width: 350px;
+    margin: 0 auto;
+}
 
-    gap: 20px;
+.details-input input{
+
+    width:100%;
+    height: 35px;
+    padding-left:30px;
+    margin: 5px;
+    border: 2px solid rgb(246, 246, 246);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+}
+
+
+.details-link {
+    text-decoration: none;
+    color: rgba(55, 52, 233, 0.801);
+    transition: color 1s, border 1s;
+}
+
+.details-link:hover {
+    color: rgb(87, 234, 229);
+    border-bottom: 2px solid rgb(87, 234, 229);
+
 }
 
 h1, h2 {
@@ -37,16 +81,16 @@ h1, h2 {
 }
 
 .details-h1 {
-    
-    padding-bottom: 50px;
+    margin-top: 0px;
+    padding-bottom: 30px;
     font-size: 40px;
 }
 
 .chart-container {
     width: 400px;
     height: 400px;
-    margin: 0px auto;
-    margin-top: 40px;
+    margin: 40px auto;
+   
 }
 
 .transaction-actions {
@@ -87,12 +131,17 @@ h1, h2 {
     background-color: rgb(111, 235, 239);
 }
 
+.btn-details {
+    display: block;
+    margin: 10px auto;
+}
+
 .income {
     color: green;
 }
 .expense {
-    color:red
+    color:red;
 }
 .balance {
-    color:brown
+    color:brown;
 }

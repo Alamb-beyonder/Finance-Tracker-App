@@ -4,13 +4,14 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
         <title>Login</title>
     </head>
-    <body>
+    <body class = "center-page">
         <div class = "body-container registration">
-        <h1 class = details-h1>Login</h1>
-
+        <h1 class ="details-h1">Login</h1>
+        <p class="details-p">Please enter your details</p>    
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -20,13 +21,19 @@
         {% endwith %}
 
         <form action="/login" method ="POST">
-            <div class="details-input">
-                <input type="text" name = "username" placeholder="Write your username here" required>
-                <input type="password" name = "password" placeholder="Write your password here" required>
-            </div>
+                <div class="details-input">
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name = "username" placeholder="Username" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name = "password" placeholder="Password" required>
+                    </div>
+                </div>
                 <button class="btn btn-details" type="submit">Login</button>
         </form>
-        <a class="btn btn-details" href="/register">Sign up here</a>
+        <p>Dont have an account? Sign up <a class="details-link" href="/register">here</a></p>
         </div>
         
     </body>
